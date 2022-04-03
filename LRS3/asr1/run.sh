@@ -8,7 +8,6 @@
 
 # general configuration
 backend=pytorch
-
 stage=-1       		# start from stage 0, stage -1 (Data Download has to be done by the user)
 stop_stage=100		# stage at which to stop
 ngpu=1         		# number of gpus ("0" uses cpu, otherwise use gpu)
@@ -102,6 +101,7 @@ echo ===========================================================================
 echo "                       Data preparation (stage:0)                          "
 echo ============================================================================
 # Stage 0: Data preparation
+echo here
 if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     echo "stage 0: Data preparation"
     echo variables

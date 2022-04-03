@@ -100,7 +100,7 @@ echo ===========================================================================
 echo ============================================================================
 echo "                       Data preparation (stage:0)                          "
 echo ============================================================================
- Stage 0: Data preparation
+#Stage 0: Data preparation
 if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     echo "stage 0: Data preparation"
     echo variables

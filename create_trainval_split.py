@@ -20,7 +20,10 @@ if not os.path.exists(PATH_TO_LRS3_VAL):
 for val_dir in VAL_LIST:
     print(val_dir)
 
-
+print(len(VAL_LIST))
+print(len(TRAIN_LIST))
+print(VAL_LIST[-1])
+print(TRAIN_LIST[0])
 ##MAKE TRAIN SET##
 if not os.path.exists(PATH_TO_LRS3_TRAIN):
     os.mkdir(PATH_TO_LRS3_TRAIN)

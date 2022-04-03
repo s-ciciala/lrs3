@@ -45,7 +45,7 @@ use_lm_valbest_average=false # if true, the validation `lm_n_average`-best langu
 
 # The LRS2 Corpus requires vertification. You have to download the
 # dataset and set your dataset dir here
-datadir=/home/szy/Documents/code/espnet/egs/LRS3/asr1/downloads/LRS3		     # The LRS2 dataset directory e.g. /home/foo/LRS2
+datadir=/disk/scratch2/s1834237/LRS3		     # The LRS2 dataset directory e.g. /home/foo/LRS2
 
 pretrain=false		     # if use LRS2 pretrain set
 segment=false  		     # if do segmentation for pretrain set
@@ -74,12 +74,12 @@ set -o pipefail
 
 # define sets
 if [ "$pretrain" = true ] ; then
-	train_set="pretrain_Train"
+	train_set="pretrain"
 else
 	train_set="train"
 fi
-train_dev="val"
-recog_set="val test"
+train_dev="trainval"
+recog_set="trainval test"
 
 echo ============================================================================
 echo "                       Data Download (stage:-1)                          "
@@ -107,7 +107,7 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     echo $datadir
     echo $segment
     echo $nj
-    for part in test val train; do
+    for part in test trainval; do
         local/data_preparation.sh $datadir $part $segment $nj || exit 1;
     done
     if [ "$pretrain" = true ] ; then
@@ -134,7 +134,7 @@ if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
 
     fbankdir=fbank
     # Generate the fbank features; by default 80-dimensional fbanks with pitch on each frame
-    for x in train val test; do
+    for x in trainval test; do
         steps/make_fbank_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true \
             data/kaldi/${x} exp/make_fbank/${x} ${fbankdir}
         utils/fix_data_dir.sh data/kaldi/${x}

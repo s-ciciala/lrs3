@@ -61,6 +61,7 @@ fbank_pitch_dir=`perl -e '($dir,$pwd)= @ARGV; if($dir!~m:^/:) { $dir = "$pwd/$di
 # use "name" as part of name of the archive.
 name=`basename $data`
 
+echo here
 echo $fbank_pitch_dir
 echo $logdir
 

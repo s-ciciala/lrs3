@@ -61,6 +61,9 @@ fbank_pitch_dir=`perl -e '($dir,$pwd)= @ARGV; if($dir!~m:^/:) { $dir = "$pwd/$di
 # use "name" as part of name of the archive.
 name=`basename $data`
 
+echo $fbank_pitch_dir
+echo $logdir
+
 mkdir -p $fbank_pitch_dir || exit 1;
 mkdir -p $logdir || exit 1;
 
@@ -74,12 +77,12 @@ scp=$data/wav.scp
 
 required="$scp $fbank_config $pitch_config"
 
-#for f in $required; do
-#  if [ ! -f $f ]; then
-#    echo "$0: no such file $f"
-#    exit 1;
-#  fi
-#done
+for f in $required; do
+  if [ ! -f $f ]; then
+    echo "$0: no such file $f"
+    exit 1;
+  fi
+done
 
 echo Test
 echo $data

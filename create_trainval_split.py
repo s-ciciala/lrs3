@@ -53,8 +53,12 @@ def make_metadata(file_lists):
             ##WIRTE TO FILE##
             filename = METADATA_DIR + "/Filelist_"+split
             file = open(filename, "w")
+            final_line = filtered[-1]
             for line in filtered:
-                file.writelines(line+"\n")
+                if line != final_line:
+                    file.writelines(line+"\n")
+                else:
+                    file.writelines(line)
         print("DONE WRITING ",split)
         file.close()
 

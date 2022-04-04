@@ -38,17 +38,13 @@ def main(sourcedir, filelistdir, savedir, dset, nj):
         pool = mp.Pool(nj)
         sourcedir += "/" + dset
         print(sourcedir)
+        print(len(filelist))
         job_args = [(i, dset, savedir, sourcedir) for i in filelist]
         print("JOBED")
         pool.map(product_helper, job_args)
     else:
         for i in filelist:
             set(i, dset, savedir, sourcedir)
-
-
-def product_helper(args):
-    return set(*args)
-
 
 def set(info, s, savedir, sourcedir):
     """Make the Kaldi files.
@@ -97,7 +93,8 @@ def set(info, s, savedir, sourcedir):
         wav.writelines(wavscp)
         wav.close()
 
-
+def product_helper(args):
+    return set(*args)
 # hand over parameter overview
 # sys.argv[1] = sourcedir (str): The LRS2 dataset dir
 #                                (e.g. /LRS2/data/lrs2_v1/mvlrs_v1/main)

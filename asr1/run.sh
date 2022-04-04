@@ -115,8 +115,8 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     	local/data_preparation.sh $datadir $part $segment $nj || exit 1;
     fi
     for part in test val train; do
-    	mv data/${part} data/${part}_org || exit 1;
     	#mv data/${part} data/${part}_org || exit 1;
+    	mv data/${part}_org data/${part} || exit 1;
     done
     echo "stage 0: Data preparation finished"
 
@@ -134,11 +134,11 @@ if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
 
     fbankdir=fbank
     # Generate the fbank features; by default 80-dimensional fbanks with pitch on each frame
-    for x in trainval test; do
+    for x in train val test; do
         steps/make_fbank_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true \
-            data/kaldi/${x} exp/make_fbank/${x} ${fbankdir}
-        utils/fix_data_dir.sh data/kaldi/${x}
+            data/${x} exp/make_fbank/${x} ${fbankdir}
         utils/fix_data_dir.sh data/${x}
+        #utils/fix_data_dir.sh data/${x}
     done
 
     if [ "$pretrain" = true ] ; then

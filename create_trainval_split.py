@@ -9,6 +9,7 @@ PATH_TO_LRS3_TRAINVAL = "/disk/scratch2/s1834237/LRS3/trainval"
 PATH_TO_LRS3_TRAIN = "/disk/scratch2/s1834237/LRS3/train"
 PATH_TO_LRS3_VAL = "/disk/scratch2/s1834237/LRS3/val"
 PATH_TO_LRS3_TEST = "/disk/scratch2/s1834237/LRS3/test"
+METADATA_DIR = "/disk/scratch2/s1834237/espnet/egs/lrs3/asr1/data/METADATA"
 
 Filelist_test = "Filelist_test"
 Filelist_train = "Filelist_test"
@@ -22,9 +23,10 @@ TRAIN_LIST = sub_dirs[VAL_SIZE:TOTAL_SPLIT]
 
 def make_metadata(file_lists):
     for split in fileLists:
-        if (split == "test"):
+        filtered = []
+        if split == "test":
             root_path = PATH_TO_LRS3_TEST
-        elif (split == "train"):
+        elif split == "train":
             root_path = PATH_TO_LRS3_TRAIN
         else:
             root_path = PATH_TO_LRS3_VAL
@@ -32,7 +34,6 @@ def make_metadata(file_lists):
         for example in sub_dir:
             example_path = os.path.join(root_path, example)
             all_mp4s = os.listdir(example_path)
-            filtered = []
             as_numbers = []
             ##We do this in order
             for mp4 in all_mp4s:
@@ -43,7 +44,12 @@ def make_metadata(file_lists):
                 target_string = example + "/" + str(value)
                 filtered.append(target_string)
             print(filtered)
-
+            ##WIRTE TO FILE##
+            filename = METADATA_DIR + "/Filelist_"+split
+            file = open(filename, "w")
+            for line in filtered:
+                file.writelines(line)
+            file.close()
 
 
 def unique_check():

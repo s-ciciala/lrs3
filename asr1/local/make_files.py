@@ -27,13 +27,9 @@ def main(sourcedir, filelistdir, savedir, dset, nj):
     print("HERE")
     print(filelistdir)
     with open(filelistdir) as filelists:
-        #print("STEP1")
         filelist = filelists.readlines()
-        #print(len(filelist))
     for i in range(len(filelist)):
-        #print("STEP2")
         filelist[i] = filelist[i].strip("\n")
-        #print(filelist[i])
     if multicore is True:
         print("VATT")
         print(dset)
@@ -43,6 +39,7 @@ def main(sourcedir, filelistdir, savedir, dset, nj):
         sourcedir += "/" + dset
         print(sourcedir)
         job_args = [(i, dset, savedir, sourcedir) for i in filelist]
+        print("JOBED")
         pool.map(product_helper, job_args)
     else:
         for i in filelist:

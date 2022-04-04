@@ -48,6 +48,7 @@ else
    echo $dset
    ### Generate the text, utt2spk and wav.scp file
    python3 -u local/make_files.py  $sourcedir $metadir $datadir $dset $nj || exit 1;
+   echo generated
    for file in text utt2spk wav.scp; do
 	sort -u $datadir/$file -o $datadir/$file || exit 1;
    done

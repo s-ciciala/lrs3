@@ -47,7 +47,7 @@ use_lm_valbest_average=false # if true, the validation `lm_n_average`-best langu
 # dataset and set your dataset dir here
 datadir=/disk/scratch2/s1834237/LRS3		     # The LRS2 dataset directory e.g. /home/foo/LRS2
 
-pretrain=false		     # if use LRS2 pretrain set
+pretrain=false		     # if use LRS3 pretrain set
 segment=false  		     # if do segmentation for pretrain set
 
 # bpemode (unigram or bpe)
@@ -114,7 +114,7 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     	part=pretrain
     	local/data_preparation.sh $datadir $part $segment $nj || exit 1;
     fi
-    for part in pretrain test val train; do
+    for part in test val train; do
     	mv data/${part} data/${part}_org || exit 1;
     	mv data/${part} data/${part}_org || exit 1;
     done

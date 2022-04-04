@@ -21,6 +21,8 @@ def main(sourcedir, filelistdir, savedir, dset, nj):
         multicore = True
     else:
         multicore = False
+    ##MUST LOWERCASE
+    dset = dset.lower()
     filelistdir = filelistdir + "/" + "Filelist_" + dset
     print("HERE")
     print(filelistdir)

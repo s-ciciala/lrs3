@@ -33,9 +33,9 @@ if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
     fi
     if [ "$dset" = test ] ; then
       echo $metadir
-      echo $metadir/Filelist_Test ${tmpdir}/filelists/Filelist_Test
-	mv $metadir/Filelist_Test ${tmpdir}/filelists/Filelist_Test
-	cat ${tmpdir}/filelists/Filelist_Test | cut -d " " -f1 > $metadir/Filelist_Test
+      echo $metadir/Filelist_test ${tmpdir}/filelists/Filelist_test
+	mv $metadir/Filelist_test ${tmpdir}/filelists/Filelist_test
+	cat ${tmpdir}/filelists/Filelist_test | cut -d " " -f1 > $metadir/Filelist_test
     fi
 fi
 

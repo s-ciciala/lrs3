@@ -48,7 +48,7 @@ def make_metadata(file_lists):
             filename = METADATA_DIR + "/Filelist_"+split
             file = open(filename, "w")
             for line in filtered:
-                file.writelines(line)
+                file.writelines(line+"\n")
             print("DONE WRITING ",split)
             file.close()
 

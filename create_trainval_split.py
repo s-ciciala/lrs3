@@ -43,12 +43,13 @@ def make_metadata(file_lists):
             for value in as_numbers:
                 target_string = example + "/" + str(value)
                 filtered.append(target_string)
-            print(filtered)
+            #print(filtered)
             ##WIRTE TO FILE##
             filename = METADATA_DIR + "/Filelist_"+split
             file = open(filename, "w")
             for line in filtered:
                 file.writelines(line)
+            print("DONE WRITING ",split)
             file.close()
 
 

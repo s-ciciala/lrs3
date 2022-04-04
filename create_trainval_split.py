@@ -25,6 +25,8 @@ def unique_check():
                 break
     print("ALL GOOD ")
 
+unique_check()
+
 ##MAKE VAL SET##
 if not os.path.exists(PATH_TO_LRS3_VAL):
     os.mkdir(PATH_TO_LRS3_VAL)
@@ -40,8 +42,7 @@ for val_dir in VAL_LIST:
         copy = os.path.join(make_folders,val_example_file)
         if not os.path.exists(copy):
             copied_file =  shutil.copy(file,copy)
-
-    #shutil.copytree(os.path.join(PATH_TO_LRS3_TRAINVAL, val_dir), PATH_TO_LRS3_VAL)
+            print("COPIED OVER :",copied_file)
 
 ##MAKE TRAIN SET##
 if not os.path.exists(PATH_TO_LRS3_TRAIN):
@@ -53,8 +54,18 @@ for train_dir in TRAIN_LIST:
         os.mkdir(make_folders)
     #shutil.copytree(os.path.join(PATH_TO_LRS3_TRAINVAL, train_dir), PATH_TO_LRS3_TRAIN)
 
-unique_check()
-
+for train_dir in TRAIN_LIST:
+    make_folders = os.path.join(PATH_TO_LRS3_TRAIN,train_dir)
+    root_folder = os.path.join(PATH_TO_LRS3_TRAINVAL,train_dir)
+    if not os.path.exists(make_folders):
+        os.mkdir(make_folders)
+    train_examples_list = os.listdir(root_folder)
+    for train_example_file in train_examples_list:
+        file = os.path.join(root_folder,train_example_file)
+        copy = os.path.join(make_folders,train_example_file)
+        if not os.path.exists(copy):
+            copied_file =  shutil.copy(file,copy)
+            print("COPIED OVER :",copied_file)
 
 
 

@@ -30,14 +30,20 @@ if not os.path.exists(PATH_TO_LRS3_VAL):
     os.mkdir(PATH_TO_LRS3_VAL)
 
 for val_dir in VAL_LIST:
-    shutil.copytree(os.path.join(PATH_TO_LRS3_TRAINVAL, val_dir), PATH_TO_LRS3_VAL)
+    make_folders = os.path.join(PATH_TO_LRS3_VAL,val_dir)
+    if not os.path.exists(make_folders):
+        os.mkdir(make_folders)
+    #shutil.copytree(os.path.join(PATH_TO_LRS3_TRAINVAL, val_dir), PATH_TO_LRS3_VAL)
 
 ##MAKE TRAIN SET##
 if not os.path.exists(PATH_TO_LRS3_TRAIN):
     os.mkdir(PATH_TO_LRS3_TRAIN)
 
 for train_dir in TRAIN_LIST:
-    shutil.copytree(os.path.join(PATH_TO_LRS3_TRAINVAL, train_dir), PATH_TO_LRS3_TRAIN)
+    make_folders = os.path.join(PATH_TO_LRS3_TRAIN,train_dir)
+    if not os.path.exists(make_folders):
+        os.mkdir(make_folders)
+    #shutil.copytree(os.path.join(PATH_TO_LRS3_TRAINVAL, train_dir), PATH_TO_LRS3_TRAIN)
 
 unique_check()
 

@@ -89,10 +89,10 @@ done
 echo Test
 echo $data
 ##COMMENTED OUT
-#utils/validate_data_dir.sh --no-text --no-feats $data || exit 1;
-#utils/fix_data_dir.sh data/train
-#utils/fix_data_dir.sh data/test
-#utils/fix_data_dir.sh data/val
+utils/validate_data_dir.sh --no-text --no-feats $data || exit 1;
+utils/fix_data_dir.sh data/train
+utils/fix_data_dir.sh data/test
+utils/fix_data_dir.sh data/val
 
 echo VALIDATED
 
@@ -198,9 +198,9 @@ if $write_utt2dur; then
     cat $logdir/utt2dur.$n || exit 1
   done > $data/utt2dur || exit 1
 fi
-utils/fix_data_dir.sh data/kaldi/train
-utils/fix_data_dir.sh data/kaldi/test
-utils/fix_data_dir.sh data/kaldi/val
+utils/fix_data_dir.sh data/train
+utils/fix_data_dir.sh data/test
+utils/fix_data_dir.sh data/val
 # Store frame_shift, fbank_config and pitch_config along with features.
 frame_shift=$(perl -ne 'if (/^--frame-shift=(\d+)/) {
                           printf "%.3f", 0.001 * $1; exit; }' $fbank_config)

@@ -13,6 +13,15 @@ assert len(sub_dirs) == TOTAL_SPLIT
 VAL_LIST = sub_dirs[:VAL_SIZE]
 TRAIN_LIST = sub_dirs[VAL_SIZE:TOTAL_SPLIT]
 
+
+def unique_check():
+    for i in TRAIN_LIST:
+        for j in VAL_LIST:
+            if i == j:
+                print("SPLIT WRONG ", str(i))
+                break
+    print("ALL GOOD ")
+
 ##MAKE VAL SET##
 if not os.path.exists(PATH_TO_LRS3_VAL):
     os.mkdir(PATH_TO_LRS3_VAL)
@@ -27,6 +36,8 @@ print(TRAIN_LIST[0])
 ##MAKE TRAIN SET##
 if not os.path.exists(PATH_TO_LRS3_TRAIN):
     os.mkdir(PATH_TO_LRS3_TRAIN)
+
+unique_check()
 
 
 

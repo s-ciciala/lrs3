@@ -8,13 +8,37 @@ VAL_SIZE = 412
 PATH_TO_LRS3_TRAINVAL = "/disk/scratch2/s1834237/LRS3/trainval"
 PATH_TO_LRS3_TRAIN = "/disk/scratch2/s1834237/LRS3/train"
 PATH_TO_LRS3_VAL = "/disk/scratch2/s1834237/LRS3/val"
+PATH_TO_LRS3_TEST = "/disk/scratch2/s1834237/LRS3/test"
+
+Filelist_test = "Filelist_test"
+Filelist_train = "Filelist_test"
+Filelist_val = "Filelist_test"
+fileLists = ["test","train","val"]
 
 sub_dirs = os.listdir(PATH_TO_LRS3_TRAINVAL)
 assert len(sub_dirs) == TOTAL_SPLIT
 VAL_LIST = sub_dirs[:VAL_SIZE]
 TRAIN_LIST = sub_dirs[VAL_SIZE:TOTAL_SPLIT]
 
-def make_metadata()
+def make_metadata(file_lists):
+    for split in fileLists:
+        if (split == "test"):
+            root_path = PATH_TO_LRS3_TEST
+        elif (split == "train"):
+            root_path = PATH_TO_LRS3_TRAIN
+        else:
+            root_path = PATH_TO_LRS3_VAL
+        sub_dir = os.listdir(root_path)
+        for example in sub_dir:
+            example_path = os.path.join(root_path, example)
+            all_mp4s = os.listdir(example_path)
+            filtered = []
+            for mp4 in all_mp4s:
+                if ".mp4" in mp4:
+                    filtered.append(example,mp4.splt('.')[0])
+            print(filtered)
+
+
 
 def unique_check():
     print("VAL LIST LEN: ",len(VAL_LIST) ," SHOULD BE :",VAL_SIZE )
@@ -68,7 +92,7 @@ for train_dir in TRAIN_LIST:
             copied_file =  shutil.copy(file,copy)
             print("COPIED OVER :",copied_file)
 
-
+make_metadata(fileLists)
 
 
 

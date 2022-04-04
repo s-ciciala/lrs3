@@ -33,10 +33,15 @@ def make_metadata(file_lists):
             example_path = os.path.join(root_path, example)
             all_mp4s = os.listdir(example_path)
             filtered = []
+            as_numbers = []
+            ##We do this in order
             for mp4 in all_mp4s:
                 if ".mp4" in mp4:
-                    target_string = example + "/" + mp4.split('.')[0]
-                    filtered.append(target_string)
+                    as_numbers.append(int(mp4.split('.')[0]))
+            as_numbers.sort()
+            for value in as_numbers:
+                target_string = example + "/" + str(value)
+                filtered.append(target_string)
             print(filtered)
 
 

@@ -21,6 +21,12 @@ assert len(sub_dirs) == TOTAL_SPLIT
 VAL_LIST = sub_dirs[:VAL_SIZE]
 TRAIN_LIST = sub_dirs[VAL_SIZE:TOTAL_SPLIT]
 
+def stringify (num):
+    if num < 10:
+        return "000"+str(num)
+    else:
+        return "00"+str(num)
+
 def make_metadata(file_lists):
     for split in fileLists:
         filtered = []
@@ -41,7 +47,7 @@ def make_metadata(file_lists):
                     as_numbers.append(int(mp4.split('.')[0]))
             as_numbers.sort()
             for value in as_numbers:
-                target_string = example + "/" + str(value)
+                target_string = example + "/" + stringify(value)
                 filtered.append(target_string)
             #print(filtered)
             ##WIRTE TO FILE##
@@ -49,8 +55,8 @@ def make_metadata(file_lists):
             file = open(filename, "w")
             for line in filtered:
                 file.writelines(line+"\n")
-            print("DONE WRITING ",split)
-            file.close()
+        print("DONE WRITING ",split)
+        file.close()
 
 
 def unique_check():

@@ -23,11 +23,11 @@ TRAIN_LIST = sub_dirs[VAL_SIZE:TOTAL_SPLIT]
 
 def stringify (num):
     if num < 10:
-        return "000"+str(num)
+        return "0000"+str(num)
     elif num > 100:
         return str(num)
     else:
-        return "00"+str(num)
+        return "000"+str(num)
 
 def make_metadata(file_lists):
     for split in fileLists:

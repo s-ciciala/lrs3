@@ -14,6 +14,7 @@ assert len(sub_dirs) == TOTAL_SPLIT
 VAL_LIST = sub_dirs[:VAL_SIZE]
 TRAIN_LIST = sub_dirs[VAL_SIZE:TOTAL_SPLIT]
 
+def make_metadata()
 
 def unique_check():
     print("VAL LIST LEN: ",len(VAL_LIST) ," SHOULD BE :",VAL_SIZE )

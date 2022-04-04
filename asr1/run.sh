@@ -114,10 +114,10 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     	part=pretrain
     	local/data_preparation.sh $datadir $part $segment $nj || exit 1;
     fi
-    for part in test val train; do
+    #for part in test val train; do
     	#mv data/${part} data/${part}_org || exit 1;
-    	mv data/${part}_org data/${part} || exit 1;
-    done
+    #	mv data/${part}_org data/${part} || exit 1;
+    #done
     echo "stage 0: Data preparation finished"
 
 fi

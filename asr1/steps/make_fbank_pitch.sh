@@ -89,7 +89,7 @@ done
 echo Test
 echo $data
 ##COMMENTED OUT
-utils/validate_data_dir.sh --no-text --no-feats $data || exit 1;
+#utils/validate_data_dir.sh --no-text --no-feats $data || exit 1;
 utils/fix_data_dir.sh data/train
 utils/fix_data_dir.sh data/test
 utils/fix_data_dir.sh data/val

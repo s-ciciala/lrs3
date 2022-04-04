@@ -55,7 +55,7 @@ else
   mfcc_pitch_dir=$data/data
 fi
 
-
+echo here
 # make $mfcc_pitch_dir an absolute pathname.
 mfcc_pitch_dir=`perl -e '($dir,$pwd)= @ARGV; if($dir!~m:^/:) { $dir = "$pwd/$dir"; } print $dir; ' $mfcc_pitch_dir ${PWD}`
 
@@ -71,7 +71,7 @@ if [ -f $data/feats.scp ]; then
   mv $data/feats.scp $data/.backup
 fi
 
-
+ehco scp
 scp=$data/wav.scp
 
 required="$scp $mfcc_config $pitch_config"

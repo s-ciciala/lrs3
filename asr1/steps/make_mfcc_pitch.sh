@@ -71,6 +71,7 @@ if [ -f $data/feats.scp ]; then
   mv $data/feats.scp $data/.backup
 fi
 
+
 scp=$data/wav.scp
 
 required="$scp $mfcc_config $pitch_config"
@@ -82,7 +83,7 @@ for f in $required; do
   fi
 done
 
-utils/validate_data_dir.sh --no-text --no-feats $data || exit 1;
+#utils/validate_data_dir.sh --no-text --no-feats $data || exit 1;
 
 if [ ! -z "$pitch_postprocess_config" ]; then
   postprocess_config_opt="--config=$pitch_postprocess_config";

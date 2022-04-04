@@ -77,7 +77,8 @@ fi
 scp=$data/wav.scp
 
 required="$scp $fbank_config $pitch_config"
-
+echo here
+echo "$scp $fbank_config $pitch_config"
 for f in $required; do
   if [ ! -f $f ]; then
     echo "$0: no such file $f"

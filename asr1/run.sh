@@ -78,8 +78,8 @@ if [ "$pretrain" = true ] ; then
 else
 	train_set="train"
 fi
-train_dev="trainval"
-recog_set="trainval test"
+train_dev="val"
+recog_set="val test"
 
 echo ============================================================================
 echo "                       Data Download (stage:-1)                          "
@@ -107,7 +107,7 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     echo $datadir
     echo $segment
     echo $nj
-    for part in test trainval; do
+    for part in test train val; do
         local/data_preparation.sh $datadir $part $segment $nj || exit 1;
     done
     if [ "$pretrain" = true ] ; then

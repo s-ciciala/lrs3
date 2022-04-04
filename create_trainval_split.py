@@ -1,7 +1,7 @@
 import os
 import sys
 import shutil
-
+##SPLIT 80:10:10
 TOTAL_SPLIT = 4004
 TEST_SIZE = 412
 VAL_SIZE = 412

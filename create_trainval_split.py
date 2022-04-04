@@ -1,5 +1,6 @@
 import os
 import sys
+import shutil
 
 TOTAL_SPLIT = 4004
 TEST_SIZE = 412
@@ -15,6 +16,8 @@ TRAIN_LIST = sub_dirs[VAL_SIZE:TOTAL_SPLIT]
 
 
 def unique_check():
+    print("VAL LIST LEN: ",len(VAL_LIST) ," SHOULD BE :",VAL_SIZE )
+    print("TRAIN LIST LEN: ",len(TRAIN_LIST) ," SHOULD BE :",TOTAL_SPLIT - VAL_SIZE )
     for i in TRAIN_LIST:
         for j in VAL_LIST:
             if i == j:
@@ -27,15 +30,14 @@ if not os.path.exists(PATH_TO_LRS3_VAL):
     os.mkdir(PATH_TO_LRS3_VAL)
 
 for val_dir in VAL_LIST:
-    print(val_dir)
+    shutil.copytree(os.path.join(PATH_TO_LRS3_TRAINVAL, val_dir), PATH_TO_LRS3_VAL)
 
-print(len(VAL_LIST))
-print(len(TRAIN_LIST))
-print(VAL_LIST[-1])
-print(TRAIN_LIST[0])
 ##MAKE TRAIN SET##
 if not os.path.exists(PATH_TO_LRS3_TRAIN):
     os.mkdir(PATH_TO_LRS3_TRAIN)
+
+for train_dir in TRAIN_LIST:
+    shutil.copytree(os.path.join(PATH_TO_LRS3_TRAINVAL, train_dir), PATH_TO_LRS3_TRAIN)
 
 unique_check()
 

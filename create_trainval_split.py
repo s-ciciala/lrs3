@@ -31,8 +31,16 @@ if not os.path.exists(PATH_TO_LRS3_VAL):
 
 for val_dir in VAL_LIST:
     make_folders = os.path.join(PATH_TO_LRS3_VAL,val_dir)
+    root_folder = os.path.join(PATH_TO_LRS3_TRAINVAL,val_dir)
     if not os.path.exists(make_folders):
         os.mkdir(make_folders)
+    val_examples_list = os.listdir(root_folder)
+    for val_example_file in val_examples_list:
+        file = os.path.join(root_folder,val_example_file)
+        copy = os.path.join(make_folders,val_example_file)
+        if not os.path.exists(copy):
+            copied_file =  shutil.copy(file,copy)
+
     #shutil.copytree(os.path.join(PATH_TO_LRS3_TRAINVAL, val_dir), PATH_TO_LRS3_VAL)
 
 ##MAKE TRAIN SET##

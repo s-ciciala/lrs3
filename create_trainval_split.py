@@ -35,7 +35,8 @@ def make_metadata(file_lists):
             filtered = []
             for mp4 in all_mp4s:
                 if ".mp4" in mp4:
-                    filtered.append(example, mp4.split('.')[0])
+                    target_string = example + "/" + mp4.split('.')[0]
+                    filtered.append(target_string)
             print(filtered)
 
 

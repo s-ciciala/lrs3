@@ -24,6 +24,8 @@ TRAIN_LIST = sub_dirs[VAL_SIZE:TOTAL_SPLIT]
 def stringify (num):
     if num < 10:
         return "000"+str(num)
+    elif num > 100:
+        return str(num)
     else:
         return "00"+str(num)
 

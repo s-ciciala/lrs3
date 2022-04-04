@@ -135,18 +135,18 @@ if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
     fbankdir=fbank
     # Generate the fbank features; by default 80-dimensional fbanks with pitch on each frame
     for x in train val test; do
-        /disk/scratch2/s1834237/espnet/egs/lrs3/asr1/steps/make_fbank_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true \
+        steps/make_fbank_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true \
             data/${x} exp/make_fbank/${x} ${fbankdir}
-        /disk/scratch2/s1834237/espnet/egs/lrs3/asr1/utils/fix_data_dir.sh data/${x}
+        utils/fix_data_dir.sh data/${x}
         #utils/fix_data_dir.sh data/${x}
     done
 
     if [ "$pretrain" = true ] ; then
 	remove_longshortdata.sh --maxframes 3000 --maxchars 400 data/pretrain_org data/pretrain
-        /disk/scratch2/s1834237/espnet/egs/lrs3/asr1/steps/make_fbank_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true \
+        steps/make_fbank_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true \
             data/pretrain exp/make_fbank/pretrain ${fbankdir}
-        /disk/scratch2/s1834237/espnet/egs/lrs3/asr1/utils/fix_data_dir.sh data/pretrain
-    	/disk/scratch2/s1834237/espnet/egs/lrs3/asr1/utils/combine_data.sh data/${train_set} \
+        utils/fix_data_dir.sh data/pretrain
+    	utils/combine_data.sh data/${train_set} \
 			      data/pretrain \
 			      data/train
     fi

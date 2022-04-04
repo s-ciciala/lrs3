@@ -23,7 +23,6 @@ echo "$0 $@"  # Print the command line for logging.
 
 if [ -f path.sh ]; then . ./path.sh; fi
 . parse_options.sh || exit 1;
-echo parsed options
 if [ $# -lt 1 ] || [ $# -gt 3 ]; then
   cat >&2 <<EOF
 Usage: $0 [options] <data-dir> [<log-dir> [<fbank-dir>] ]
@@ -74,23 +73,21 @@ fi
 scp=$data/wav.scp
 
 required="$scp $fbank_config $pitch_config"
-echo here
-echo "$scp $fbank_config $pitch_config"
-for f in $required; do
-  if [ ! -f $f ]; then
-    echo "$0: no such file $f"
-    exit 1;
-  fi
-done
+
+#for f in $required; do
+#  if [ ! -f $f ]; then
+#    echo "$0: no such file $f"
+#    exit 1;
+#  fi
+#done
 
 echo Test
 echo $data
 ##COMMENTED OUT
 #utils/validate_data_dir.sh --no-text --no-feats $data || exit 1;
-
-utils/fix_data_dir.sh data/kaldi/train
-utils/fix_data_dir.sh data/kaldi/test
-utils/fix_data_dir.sh data/kaldi/val
+#utils/fix_data_dir.sh data/train
+#utils/fix_data_dir.sh data/test
+#utils/fix_data_dir.sh data/val
 
 echo VALIDATED
 

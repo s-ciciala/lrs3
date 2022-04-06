@@ -166,7 +166,7 @@ if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
     done
 fi
 ##echo remove temp files occasionaly
-find /tmp -user s1834237 -exec rm -rf {} \;
+##find /tmp -user s1834237 -exec rm -rf {} \;
 echo ============================================================================
 echo "                       Dictionary and Json Data Preparation (stage:2)                          "
 echo ============================================================================

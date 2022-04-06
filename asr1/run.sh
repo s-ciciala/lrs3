@@ -122,7 +122,7 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     #done
     echo "stage 0: Data preparation finished"
 
-##fi
+fi
 echo ============================================================================
 echo "                       Feature Generation (stage:1)                          "
 echo ============================================================================

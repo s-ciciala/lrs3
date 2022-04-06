@@ -5,7 +5,7 @@
 
 . ./path.sh || exit 1;
 . ./cmd.sh || exit 1;
-
+File "/disk/scratch2/s1834237/espnet/espnet/asr/pytorch_backend/asr.py"
 # general configuration
 backend=pytorch
 stage=-1       		# start from stage 0, stage -1 (Data Download has to be done by the user)
@@ -26,6 +26,7 @@ preprocess_config=conf/specaug.yaml
 train_config=conf/babel/train.yaml
 lm_config=conf/babel/lm.yaml
 decode_config=conf/babel/decode.yaml
+
 
 
 # rnnlm related

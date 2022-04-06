@@ -164,7 +164,8 @@ if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
             ${feat_recog_dir}
     done
 fi
-
+echo remove temp files occasionaly
+find /tmp -user s1834237 -exec rm -rf {} \;
 echo ============================================================================
 echo "                       Dictionary and Json Data Preparation (stage:2)                          "
 echo ============================================================================
@@ -184,15 +185,15 @@ if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
         wc -l ${dict}
 
     else
-	gdrive_download '1ZXXCXSbbFS2PDlrs9kbJL9pE6-5nPPxi' 'model.v1.tar.gz'
-	tar -xf model.v1.tar.gz
-	mv avsrlrs2_3/exp/train_rnnlm_pytorch_lm_unigram500 exp/pretrainedlm
-	mv avsrlrs2_3/data/lang_char data/
-    	mv data/lang_char/train_unigram500.model data/lang_char/${train_set}_unigram500.model
-    	mv data/lang_char/train_unigram500.vocab data/lang_char/${train_set}_unigram500.vocab
-    	mv data/lang_char/train_unigram500_units.txt data/lang_char/${train_set}_unigram500_units.txt
-  	rm -rf avsrlrs2_3
-	rm -rf model.v1.tar.gz
+	#gdrive_download '1ZXXCXSbbFS2PDlrs9kbJL9pE6-5nPPxi' 'model.v1.tar.gz'
+	#tar -xf model.v1.tar.gz
+	#mv avsrlrs2_3/exp/train_rnnlm_pytorch_lm_unigram500 exp/pretrainedlm
+	#mv avsrlrs2_3/data/lang_char data/
+  #  	mv data/lang_char/train_unigram500.model data/lang_char/${train_set}_unigram500.model
+  #  	mv data/lang_char/train_unigram500.vocab data/lang_char/${train_set}_unigram500.vocab
+  #  	mv data/lang_char/train_unigram500_units.txt data/lang_char/${train_set}_unigram500_units.txt
+  #	rm -rf avsrlrs2_3
+	#rm -rf model.v1.tar.gz
 
 #	##### it is depands on your corpus, if the corpus text transcription is uppercase, use this to convert to lowercase
     	textfilenames1=data/${train_set}/text

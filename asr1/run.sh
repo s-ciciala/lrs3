@@ -23,9 +23,10 @@ train_lm=false
 do_delta=false
 
 preprocess_config=conf/specaug.yaml
-train_config=conf/train.yaml
-lm_config=conf/lm.yaml
-decode_config=conf/decode.yaml
+train_config=conf/babel/train.yaml
+lm_config=conf/babel/lm.yaml
+decode_config=conf/babel/decode.yaml
+
 
 # rnnlm related
 lm_resume= # specify a snapshot file to resume LM training
@@ -214,6 +215,7 @@ if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
         data2json.sh --nj ${nj} --feat ${feat_recog_dir}/feats.scp --bpecode ${bpemodel}.model \
             data/${rtask} ${dict} > ${feat_recog_dir}/data_${bpemode}${nbpe}.json
     done
+    python fix_json.py
 fi
 echo ============================================================================
 echo "                       LM (stage:3)                          "

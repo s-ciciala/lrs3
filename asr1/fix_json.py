@@ -1,5 +1,5 @@
 SPLITS = ["test/","train/","val/"]
-PATH_TO_DUMP = "/disk/scratch2/s1834237/espnet/egs/lrs3/dump/"
+PATH_TO_DUMP = "/disk/scratch2/s1834237/espnet/egs/lrs3/asr1/dump/"
 DELTA = "deltafalse/"
 FILE = "data_unigram500.json"
 

@@ -165,6 +165,7 @@ if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
             ${feat_recog_dir}
     done
 fi
+##removed this
 ##echo remove temp files occasionaly
 ##find /tmp -user s1834237 -exec rm -rf {} \;
 echo ============================================================================

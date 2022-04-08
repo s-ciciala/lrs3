@@ -71,7 +71,7 @@ if [ -f $data/feats.scp ]; then
   mv $data/feats.scp $data/.backup
 fi
 
-ehco scp
+echo scp
 scp=$data/wav.scp
 
 required="$scp $mfcc_config $pitch_config"

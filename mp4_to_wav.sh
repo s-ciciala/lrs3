@@ -8,7 +8,7 @@
 #fi
 
 #data=$1
-data=datadir=/disk/scratch2/s1834237/LRS3_wav/LRS3		     # The LRS2 dataset directory e.g. /home/foo/LRS2
+data=/disk/scratch2/s1834237/LRS3_wav/LRS3		     # The LRS2 dataset directory e.g. /home/foo/LRS2
 
 for dataset in train val test; do
     for mp4_path in ${data}/${dataset}/*/*.mp4; do

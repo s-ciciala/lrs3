@@ -28,8 +28,8 @@ for split in SPLITS:
     dataset_path = PATH_TO_LRS3 + split
     files = os.listdir(dataset_path)
     print("SPLIT ", str(split))
-    for file in tqdm(files):
-        file_path = dataset_path + file +"/"
+    for file in tqdm(range(len(files))):
+        file_path = dataset_path + files[file] +"/"
         examples = os.listdir(file_path)
         for example in examples:
             if ".mp4" in example:

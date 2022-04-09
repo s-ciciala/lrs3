@@ -12,8 +12,8 @@ PATH_TO_LRS3_TEST = "/disk/scratch2/s1834237/LRS3/test"
 METADATA_DIR = "/disk/scratch2/s1834237/espnet/egs/lrs3/asr1/data/METADATA"
 
 Filelist_test = "Filelist_test"
-Filelist_train = "Filelist_test"
-Filelist_val = "Filelist_test"
+Filelist_train = "Filelist_train"
+Filelist_val = "Filelist_val"
 fileLists = ["test","train","val"]
 
 sub_dirs = os.listdir(PATH_TO_LRS3_TRAINVAL)
@@ -118,6 +118,3 @@ for train_dir in TRAIN_LIST:
             print("COPIED OVER :",copied_file)
 
 make_metadata(fileLists)
-
-
-

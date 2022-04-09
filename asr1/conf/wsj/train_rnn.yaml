@@ -4,12 +4,12 @@ etype: lstmp     # encoder architecture type
 elayers: 3
 eunits: 1024
 eprojs: 1024
-#subsample: "1_1_1" # skip every n frame from input to nth layers
+subsample: "1_1_1" # skip every n frame from input to nth layers
 # decoder related
-dlayers: 1
+dlayers: 2
 dunits: 1024
 # attention related
-atype: location
+atype: dot
 adim: 1024
 aconv-chans: 10
 aconv-filts: 100

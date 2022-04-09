@@ -7,6 +7,7 @@ import librosa
 import os
 import sys
 from pydub import AudioSegment
+import tqdm
 
 SPLITS = ["test/","train/","val/"]
 PATH_TO_LRS3 = "/disk/scratch2/s1834237/LRS3_wav/LRS3/"
@@ -26,7 +27,8 @@ def convert_mp4(mp4_path, output_file):
 for split in SPLITS:
     dataset_path = PATH_TO_LRS3 + split
     files = os.listdir(dataset_path)
-    for file in files:
+    print("SPLIT ", str(split))
+    for file in tqdm(files):
         file_path = dataset_path + file +"/"
         examples = os.listdir(file_path)
         for example in examples:

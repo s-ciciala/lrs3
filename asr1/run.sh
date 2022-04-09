@@ -10,7 +10,7 @@
 backend=pytorch
 stage=-1       		# start from stage 0, stage -1 (Data Download has to be done by the user)
 stop_stage=100		# stage at which to stop
-ngpu=1         		# number of gpus ("0" uses cpu, otherwise use gpu)
+ngpu=3         		# number of gpus ("0" uses cpu, otherwise use gpu)
 nj=8
 debugmode=1
 dumpdir=dump   		# directory to dump full features

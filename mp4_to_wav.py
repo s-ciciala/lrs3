@@ -36,7 +36,8 @@ for split in SPLITS:
                 mp4_path = file_path + example
                 wav_form = example.split(".")
                 audio_file = wav_form[0] + ".wav"
-                wav_path = file_path + audio_file
-                print("Convering " , mp4_path)
-                convert_mp4(mp4_path,wav_path)
+                if audio_file not in examples:
+                    wav_path = file_path + audio_file
+                    print("Convering " , mp4_path)
+                    convert_mp4(mp4_path,wav_path)
 

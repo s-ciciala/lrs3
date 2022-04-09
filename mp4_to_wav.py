@@ -7,7 +7,7 @@ import librosa
 import os
 import sys
 from pydub import AudioSegment
-import tqdm
+import tqdm as tqdm
 
 SPLITS = ["test/","train/","val/"]
 PATH_TO_LRS3 = "/disk/scratch2/s1834237/LRS3_wav/LRS3/"

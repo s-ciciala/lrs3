@@ -28,7 +28,7 @@ for split in SPLITS:
     dataset_path = PATH_TO_LRS3 + split
     files = os.listdir(dataset_path)
     print("SPLIT ", str(split))
-    for file in tqdm(range(len(files))):
+    for file in range(len(files)):
         file_path = dataset_path + files[file] +"/"
         examples = os.listdir(file_path)
         for example in examples:
@@ -37,5 +37,6 @@ for split in SPLITS:
                 wav_form = example.split(".")
                 audio_file = wav_form[0] + ".wav"
                 wav_path = file_path + audio_file
+                print("Convering " , mp4_path)
                 convert_mp4(mp4_path,wav_path)
 

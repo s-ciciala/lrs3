@@ -1,6 +1,6 @@
 # network architecture
 # encoder related
-etype: vggblstmp     # encoder architecture type
+etype: lstmp     # encoder architecture type
 elayers: 3
 eunits: 1024
 eprojs: 1024

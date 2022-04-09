@@ -47,8 +47,8 @@ use_lm_valbest_average=false # if true, the validation `lm_n_average`-best langu
 
 # The LRS2 Corpus requires vertification. You have to download the
 # dataset and set your dataset dir here
-datadir=/disk/scratch2/s1834237/LRS3_wav/LRS3		     # The LRS2 dataset directory e.g. /home/foo/LRS2
-#datadir=/disk/scratch2/s1834237/LRS3
+#datadir=/disk/scratch2/s1834237/LRS3_wav/LRS3		     # The LRS2 dataset directory e.g. /home/foo/LRS2
+datadir=/disk/scratch2/s1834237/LRS3
 pretrain=false		     # if use LRS3 pretrain set
 segment=false  		     # if do segmentation for pretrain set
 

@@ -10,7 +10,7 @@
 backend=pytorch
 stage=-1       		# start from stage 0, stage -1 (Data Download has to be done by the user)
 stop_stage=100		# stage at which to stop
-ngpu=3         		# number of gpus ("0" uses cpu, otherwise use gpu)
+ngpu=2         		# number of gpus ("0" uses cpu, otherwise use gpu)
 nj=8
 debugmode=1
 dumpdir=dump   		# directory to dump full features
@@ -92,7 +92,7 @@ echo ===========================================================================
 #    if [ -d "$datadir" ]; then
 #    	echo "Dataset already exists."
 #    else
-#    	echo "For downloading the data, please visit 'https://www.robots.ox.ac.uk/~vgg/data/lip_reading/lrs2.html'."
+#    	echo "For downloading the data, please visit 'https://ww w.robots.ox.ac.uk/~vgg/data/lip_reading/lrs2.html'."
 #    	echo "You will need to sign a Data Sharing agreement with BBC Research & Development before getting access."
 #    	echo "Please download the dataset by yourself and save the dataset directory in path.sh file"
 #    	echo "Thanks!"
@@ -104,18 +104,18 @@ echo "                       Data preparation (stage:0)                         
 echo ============================================================================
 #Stage 0: Data preparation
 if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
-##    echo "stage 0: Data preparation"
-##    echo variables
-##    echo $datadir
-##    echo $segment
-##    echo $nj
-##    for part in test train val; do
-##        local/data_preparation.sh $datadir $part $segment $nj || exit 1;
-##    done
-##    if [ "$pretrain" = true ] ; then
-##    	part=pretrain
-##    	local/data_preparation.sh $datadir $part $segment $nj || exit 1;
-##    fi
+    echo "stage 0: Data preparation"
+    echo variables
+    echo $datadir
+    echo $segment
+    echo $nj
+    for part in test train val; do
+        local/data_preparation.sh $datadir $part $segment $nj || exit 1;
+    done
+    if [ "$pretrain" = true ] ; then
+    	part=pretrain
+    	local/data_preparation.sh $datadir $part $segment $nj || exit 1;
+    fi
     #for part in test val train; do
     	#mv data/${part} data/${part}_org || exit 1;
     #	mv data/${part}_org data/${part} || exit 1;
@@ -129,46 +129,45 @@ echo ===========================================================================
 feat_tr_dir=${dumpdir}/${train_set}/delta${do_delta}; mkdir -p ${feat_tr_dir}
 feat_test_dir=${dumpdir}/test/delta${do_delta}; mkdir -p ${feat_test_dir}
 feat_val_dir=${dumpdir}/val/delta${do_delta}; mkdir -p ${feat_val_dir}
-##if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
+if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
     ### Task dependent. You have to design training and dev sets by yourself.
     ### But you can utilize Kaldi recipes in most cases
-##    echo "stage 1: Feature Generation"
+    echo "stage 1: Feature Generation"
 
-##    fbankdir=mfcc
+    fbankdir=mfcc
     # Generate the fbank features; by default 80-dimensional fbanks with pitch on each frame
-##    for x in val train test; do
+    for x in train val test; do
+      steps/make_mfcc_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true data/${x} exp/make_mfcc/${x} ${fbankdir}
+      utils/fix_data_dir.sh data/${x}
       #utils/fix_data_dir.sh data/${x}
-##      steps/make_mfcc_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true data/${x} exp/make_mfcc/${x} ${fbankdir}
-##      utils/fix_data_dir.sh data/${x}
-      #utils/fix_data_dir.sh data/${x}
-##    done
+    done
 
-##    if [ "$pretrain" = true ] ; then
-##      remove_longshortdata.sh --maxframes 3000 --maxchars 400 data/pretrain_org data/pretrain
-##      steps/make_mfcc_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true \
-##            data/pretrain exp/make_fbank/pretrain ${fbankdir}
-##      utils/fix_data_dir.sh data/pretrain
-##    	utils/combine_data.sh data/${train_set} \
-##			      data/pretrain \
-##			      data/train
-##    fi
+    if [ "$pretrain" = true ] ; then
+      remove_longshortdata.sh --maxframes 3000 --maxchars 400 data/pretrain_org data/pretrain
+      steps/make_mfcc_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true \
+            data/pretrain exp/make_fbank/pretrain ${fbankdir}
+      utils/fix_data_dir.sh data/pretrain
+    	utils/combine_data.sh data/${train_set} \
+			      data/pretrain \
+			      data/train
+    fi
 
     # compute global CMVN
-##    compute-cmvn-stats scp:data/${train_set}/feats.scp data/${train_set}/cmvn.ark
+    compute-cmvn-stats scp:data/${train_set}/feats.scp data/${train_set}/cmvn.ark
 
     # dump features for training
-##    dump.sh --cmd "$train_cmd" --nj ${nj} --do_delta ${do_delta} \
-##        data/${train_set}/feats.scp data/${train_set}/cmvn.ark exp/dump_feats/train_set ${feat_tr_dir=}
-##    for rtask in ${recog_set}; do
-##       feat_recog_dir=${dumpdir}/${rtask}/delta${do_delta}; mkdir -p ${feat_recog_dir}
-##        dump.sh --cmd "$train_cmd" --nj ${nj} --do_delta ${do_delta} \
-##            data/${rtask}/feats.scp data/${train_set}/cmvn.ark exp/dump_feats/recog/${rtask} \
-##            ${feat_recog_dir}
-##    done
-##fi
+    dump.sh --cmd "$train_cmd" --nj ${nj} --do_delta ${do_delta} \
+        data/${train_set}/feats.scp data/${train_set}/cmvn.ark exp/dump_feats/train_set ${feat_tr_dir=}
+    for rtask in ${recog_set}; do
+       feat_recog_dir=${dumpdir}/${rtask}/delta${do_delta}; mkdir -p ${feat_recog_dir}
+        dump.sh --cmd "$train_cmd" --nj ${nj} --do_delta ${do_delta} \
+            data/${rtask}/feats.scp data/${train_set}/cmvn.ark exp/dump_feats/recog/${rtask} \
+            ${feat_recog_dir}
+    done
+fi
 ##removed this
-#echo remove temp files occasionaly
-#find /tmp -user s1834237 -exec rm -rf {} \;
+echo remove temp files occasionaly
+find /tmp -user s1834237 -exec rm -rf {} \;
 echo ============================================================================
 echo "                       Dictionary and Json Data Preparation (stage:2)                          "
 echo ============================================================================

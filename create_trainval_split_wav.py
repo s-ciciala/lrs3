@@ -118,6 +118,3 @@ for train_dir in TRAIN_LIST:
             print("COPIED OVER :",copied_file)
 
 make_metadata(fileLists)
-
-
-

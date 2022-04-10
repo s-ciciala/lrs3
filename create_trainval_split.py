@@ -5,7 +5,7 @@ import shutil
 TOTAL_SPLIT = 4004
 TEST_SIZE = 412
 VAL_SIZE = 412
-PATH_TO_LRS3_TRAINVAL = "/disk/scratch2/s1834237LRS3/trainval"
+PATH_TO_LRS3_TRAINVAL = "/disk/scratch2/s1834237/LRS3/trainval"
 PATH_TO_LRS3_TRAIN = "/disk/scratch2/s1834237LRS3/train"
 PATH_TO_LRS3_VAL = "/disk/scratch2/s1834237/LRS3/val"
 PATH_TO_LRS3_TEST = "/disk/scratch2/s1834237LRS3/test"

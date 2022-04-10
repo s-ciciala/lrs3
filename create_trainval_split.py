@@ -6,7 +6,7 @@ TOTAL_SPLIT = 4004
 TEST_SIZE = 412
 VAL_SIZE = 412
 PATH_TO_LRS3_TRAINVAL = "/disk/scratch2/s1834237/LRS3/trainval"
-PATH_TO_LRS3_TRAIN = "/disk/scratch2/s1834237LRS3/train"
+PATH_TO_LRS3_TRAIN = "/disk/scratch2/s1834237/LRS3/train"
 PATH_TO_LRS3_VAL = "/disk/scratch2/s1834237/LRS3/val"
 PATH_TO_LRS3_TEST = "/disk/scratch2/s1834237LRS3/test"
 METADATA_DIR = "/disk/scratch2/s1834237/espnet/egs/lrs3/asr1/data/METADATA"
@@ -90,6 +90,8 @@ for val_dir in VAL_LIST:
     for val_example_file in val_examples_list:
         file = os.path.join(root_folder,val_example_file)
         copy = os.path.join(make_folders,val_example_file)
+        print(file)
+        print(copy)
         if not os.path.exists(copy):
             copied_file =  shutil.copy(file,copy)
             print("COPIED OVER :",copied_file)

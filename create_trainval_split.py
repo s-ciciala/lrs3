@@ -113,6 +113,8 @@ for train_dir in TRAIN_LIST:
     for train_example_file in train_examples_list:
         file = os.path.join(root_folder,train_example_file)
         copy = os.path.join(make_folders,train_example_file)
+        print(file)
+        print(copy)
         if not os.path.exists(copy):
             copied_file =  shutil.copy(file,copy)
             print("COPIED OVER :",copied_file)

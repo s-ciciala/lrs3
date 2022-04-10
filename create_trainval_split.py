@@ -42,6 +42,9 @@ def make_metadata(file_lists):
         for example in sub_dir:
             example_path = os.path.join(root_path, example)
             all_mp4s = os.listdir(example_path)
+            print(all_mp4s[0])
+            print(all_mp4s[2])
+            print(all_mp4s[1])
             as_numbers = []
             ##We do this in order
             for mp4 in all_mp4s:

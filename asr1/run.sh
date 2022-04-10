@@ -129,64 +129,64 @@ echo ===========================================================================
 feat_tr_dir=${dumpdir}/${train_set}/delta${do_delta}; mkdir -p ${feat_tr_dir}
 feat_test_dir=${dumpdir}/test/delta${do_delta}; mkdir -p ${feat_test_dir}
 feat_val_dir=${dumpdir}/val/delta${do_delta}; mkdir -p ${feat_val_dir}
-if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
+##if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
     ### Task dependent. You have to design training and dev sets by yourself.
     ### But you can utilize Kaldi recipes in most cases
-    echo "stage 1: Feature Generation"
+##    echo "stage 1: Feature Generation"
 
-    fbankdir=mfcc
+##    fbankdir=mfcc
     # Generate the fbank features; by default 80-dimensional fbanks with pitch on each frame
-    for x in train val test; do
-      steps/make_mfcc_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true data/${x} exp/make_mfcc/${x} ${fbankdir}
-      utils/fix_data_dir.sh data/${x}
+##    for x in train val test; do
+##      steps/make_mfcc_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true data/${x} exp/make_mfcc/${x} ${fbankdir}
+##      utils/fix_data_dir.sh data/${x}
       #utils/fix_data_dir.sh data/${x}
-    done
+##    done
 
-    if [ "$pretrain" = true ] ; then
-      remove_longshortdata.sh --maxframes 3000 --maxchars 400 data/pretrain_org data/pretrain
-      steps/make_mfcc_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true \
-            data/pretrain exp/make_fbank/pretrain ${fbankdir}
-      utils/fix_data_dir.sh data/pretrain
-    	utils/combine_data.sh data/${train_set} \
-			      data/pretrain \
-			      data/train
-    fi
+##    if [ "$pretrain" = true ] ; then
+##      remove_longshortdata.sh --maxframes 3000 --maxchars 400 data/pretrain_org data/pretrain
+##      steps/make_mfcc_pitch.sh --cmd "$train_cmd" --nj ${nj} --write_utt2num_frames true \
+##            data/pretrain exp/make_fbank/pretrain ${fbankdir}
+##      utils/fix_data_dir.sh data/pretrain
+##    	utils/combine_data.sh data/${train_set} \
+##			      data/pretrain \
+##			      data/train
+##    fi
 
     # compute global CMVN
-    compute-cmvn-stats scp:data/${train_set}/feats.scp data/${train_set}/cmvn.ark
+##    compute-cmvn-stats scp:data/${train_set}/feats.scp data/${train_set}/cmvn.ark
 
     # dump features for training
-    dump.sh --cmd "$train_cmd" --nj ${nj} --do_delta ${do_delta} \
-        data/${train_set}/feats.scp data/${train_set}/cmvn.ark exp/dump_feats/train_set ${feat_tr_dir=}
-    for rtask in ${recog_set}; do
-       feat_recog_dir=${dumpdir}/${rtask}/delta${do_delta}; mkdir -p ${feat_recog_dir}
-        dump.sh --cmd "$train_cmd" --nj ${nj} --do_delta ${do_delta} \
-            data/${rtask}/feats.scp data/${train_set}/cmvn.ark exp/dump_feats/recog/${rtask} \
-            ${feat_recog_dir}
-    done
-fi
+##    dump.sh --cmd "$train_cmd" --nj ${nj} --do_delta ${do_delta} \
+##        data/${train_set}/feats.scp data/${train_set}/cmvn.ark exp/dump_feats/train_set ${feat_tr_dir=}
+##    for rtask in ${recog_set}; do
+##       feat_recog_dir=${dumpdir}/${rtask}/delta${do_delta}; mkdir -p ${feat_recog_dir}
+##        dump.sh --cmd "$train_cmd" --nj ${nj} --do_delta ${do_delta} \
+##            data/${rtask}/feats.scp data/${train_set}/cmvn.ark exp/dump_feats/recog/${rtask} \
+##            ${feat_recog_dir}
+##    done
+##fi
 ##removed this
-echo remove temp files occasionaly
-find /tmp -user s1834237 -exec rm -rf {} \;
+##echo remove temp files occasionaly
+##find /tmp -user s1834237 -exec rm -rf {} \;
 echo ============================================================================
 echo "                       Dictionary and Json Data Preparation (stage:2)                          "
 echo ============================================================================
 dict=data/lang_char/${train_set}_${bpemode}${nbpe}_units.txt
 bpemodel=data/lang_char/${train_set}_${bpemode}${nbpe}
 echo "dictionary: ${dict}"
-if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
+##if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
     ### Task dependent. You have to check non-linguistic symbols used in the corpus.
-    echo "stage 2: Dictionary and Json Data Preparation"
+##    echo "stage 2: Dictionary and Json Data Preparation"
 
-    if [ "$train_lm" = true ] ; then
-        mkdir -p data/lang_char/
-        echo "<unk> 1" > ${dict} # <unk> must be 1, 0 will be used for "blank" in CTC
-        cut -f 2- -d" " data/${train_set}/text > data/lang_char/input.txt
-        spm_train --input=data/lang_char/input.txt --vocab_size=${nbpe} --model_type=${bpemode} --model_prefix=${bpemodel} --input_sentence_size=100000000
-        spm_encode --model=${bpemodel}.model --output_format=piece < data/lang_char/input.txt | tr ' ' '\n' | sort | uniq | awk '{print $0 " " NR+1}' >> ${dict}
-        wc -l ${dict}
+##    if [ "$train_lm" = true ] ; then
+##        mkdir -p data/lang_char/
+##        echo "<unk> 1" > ${dict} # <unk> must be 1, 0 will be used for "blank" in CTC
+##        cut -f 2- -d" " data/${train_set}/text > data/lang_char/input.txt
+##        spm_train --input=data/lang_char/input.txt --vocab_size=${nbpe} --model_type=${bpemode} --model_prefix=${bpemodel} --input_sentence_size=100000000
+##        spm_encode --model=${bpemodel}.model --output_format=piece < data/lang_char/input.txt | tr ' ' '\n' | sort | uniq | awk '{print $0 " " NR+1}' >> ${dict}
+##        wc -l ${dict}
 
-    else
+##    else
 	##gdrive_download '1ZXXCXSbbFS2PDlrs9kbJL9pE6-5nPPxi' 'model.v1.tar.gz'
 	##tar -xf model.v1.tar.gz
 	##mv avsrlrs2_3/exp/train_rnnlm_pytorch_lm_unigram500 exp/pretrainedlm
@@ -198,28 +198,28 @@ if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
 	##rm -rf model.v1.tar.gz
 
 #	##### it is depands on your corpus, if the corpus text transcription is uppercase, use this to convert to lowercase
-    	textfilenames1=data/${train_set}/text
-   	  textfilenames2=data/test/text
-    	textfilenames3=data/val/text
-    	for textfilename in $textfilenames1 $textfilenames2 $textfilenames3
-    	do
-	    sed -r 's/([^ \t]+\s)(.*)/\1\L\2/' $textfilename > ${textfilename}1  || exit 1;
-	    rm -rf $textfilename  || exit 1;
-	    mv ${textfilename}1 $textfilename  || exit 1;
-    	done
-    fi
+##    	textfilenames1=data/${train_set}/text
+##   	  textfilenames2=data/test/text
+##    	textfilenames3=data/val/text
+##    	for textfilename in $textfilenames1 $textfilenames2 $textfilenames3
+##    	do
+##	    sed -r 's/([^ \t]+\s)(.*)/\1\L\2/' $textfilename > ${textfilename}1  || exit 1;
+##	    rm -rf $textfilename  || exit 1;
+##	    mv ${textfilename}1 $textfilename  || exit 1;
+##    	done
+##    fi
 
     # make json labels
-    data2json.sh --nj ${nj} --feat ${feat_tr_dir}/feats.scp --bpecode ${bpemodel}.model \
-        data/${train_set} ${dict} > ${feat_tr_dir}/data_${bpemode}${nbpe}.json
-
-    for rtask in ${recog_set}; do
-        feat_recog_dir=${dumpdir}/${rtask}/delta${do_delta}
-        data2json.sh --nj ${nj} --feat ${feat_recog_dir}/feats.scp --bpecode ${bpemodel}.model \
-            data/${rtask} ${dict} > ${feat_recog_dir}/data_${bpemode}${nbpe}.json
-    done
-    python fix_json.py
-fi
+##    data2json.sh --nj ${nj} --feat ${feat_tr_dir}/feats.scp --bpecode ${bpemodel}.model \
+##        data/${train_set} ${dict} > ${feat_tr_dir}/data_${bpemode}${nbpe}.json
+##
+##    for rtask in ${recog_set}; do
+##        feat_recog_dir=${dumpdir}/${rtask}/delta${do_delta}
+##        data2json.sh --nj ${nj} --feat ${feat_recog_dir}/feats.scp --bpecode ${bpemodel}.model \
+##            data/${rtask} ${dict} > ${feat_recog_dir}/data_${bpemode}${nbpe}.json
+##    done
+##    python fix_json.py
+##fi
 echo ============================================================================
 echo "                       LM (stage:3)                          "
 echo ============================================================================
